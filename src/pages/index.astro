@@ -1,8 +1,7 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import Name from "./Name.svelte";
 ---
 
 <!doctype html>
@@ -11,10 +10,35 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header />
 		<main>
-			<h1>amsyarasyiq</h1>
+			<Name client:load />
+
+			<div style="display:none">
+				<a class="link" href="/about">about</a>
+				&nbsp;|&nbsp;
+				<a class="link" href="/blog">blogs</a>
+			</div>
 		</main>
-		<Footer />
 	</body>
 </html>
+
+<style>
+	body {
+		margin: 0;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+	main {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+	.link {
+		margin-top: 20px;
+		font-size: 1.4rem;
+		text-decoration: none;
+		color: #848484;
+	}
+</style>
