@@ -1,0 +1,49 @@
+:root {
+  --ink: #1a1a1a;
+  --ink-soft: #333333;
+  --paper: #f5f3ed;
+  --paper-strong: #faf9f5;
+  --paper-tint: #edeae2;
+  --accent: #1a1a1a;
+  --accent-deep: #555555;
+  --muted: #777777;
+  --line: rgba(26, 26, 26, 0.12);
+  --line-dark: rgba(245, 243, 237, 0.15);
+  --header-bg: rgba(245, 243, 237, 0.88);
+
+  --display: "DM Sans", "Avenir Next", "Trebuchet MS", sans-serif;
+  --body: "DM Sans", "Avenir Next", "Trebuchet MS", sans-serif;
+  --mono: "Space Mono", "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+
+  --callout-bg: #1a1a1a;
+  --callout-ink: #f5f3ed;
+  --callout-muted: rgba(245, 243, 237, 0.65);
+  --callout-line: rgba(245, 243, 237, 0.15);
+  --callout-btn-border: rgba(245, 243, 237, 0.3);
+  --callout-btn-hover-bg: #f5f3ed;
+  --callout-btn-hover-text: #1a1a1a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f5f3ed;
+    --ink-soft: #cccccc;
+    --paper: #303030;
+    --paper-strong: #383838;
+    --paper-tint: #3d3d3d;
+    --accent: #f5f3ed;
+    --accent-deep: #a8a59e;
+    --muted: #9c9993;
+    --line: rgba(245, 243, 237, 0.12);
+    --line-dark: rgba(245, 243, 237, 0.15);
+    --header-bg: rgba(48, 48, 48, 0.88);
+
+    --callout-bg: #242424;
+    --callout-ink: #f5f3ed;
+    --callout-muted: rgba(245, 243, 237, 0.65);
+    --callout-line: rgba(245, 243, 237, 0.12);
+    --callout-btn-border: rgba(245, 243, 237, 0.28);
+    --callout-btn-hover-bg: #f5f3ed;
+    --callout-btn-hover-text: #303030;
+  }
+}

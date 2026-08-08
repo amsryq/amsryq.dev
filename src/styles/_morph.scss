@@ -1,0 +1,269 @@
+@use "mixins" as *;
+
+.morph-system-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  pointer-events: none;
+  height: 56px;
+
+  .morph-header-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    opacity: 0;
+    background: var(--header-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
+    pointer-events: none;
+  }
+
+  .morph-system-inner {
+    position: relative;
+    height: 56px;
+  }
+}
+
+.morph-brand-element {
+  position: absolute;
+  top: 110px;
+  left: 0;
+  pointer-events: auto;
+  will-change: transform, top;
+
+  @include respond-to("sm") {
+    top: 48px;
+  }
+
+  .morph-brand-link {
+    font-family: var(--display);
+    font-size: clamp(2.7rem, 11vw, 7.5rem);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.92;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: baseline;
+    text-decoration: none;
+    cursor: default;
+    user-select: text;
+    -webkit-user-select: text;
+
+    .brand-char-a {
+      display: inline-block;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    .brand-emit-wrap {
+      display: inline-flex;
+      overflow: hidden;
+      white-space: nowrap;
+      vertical-align: baseline;
+      width: auto;
+      will-change: width, opacity;
+      user-select: text;
+      -webkit-user-select: text;
+
+      .emit-letter {
+        display: inline-block;
+        will-change: transform, opacity;
+        user-select: text;
+        -webkit-user-select: text;
+      }
+    }
+
+    .brand-char-dot {
+      color: var(--accent-deep);
+      display: inline-block;
+      flex-shrink: 0;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+  }
+
+  &.is-collapsed {
+    .morph-brand-link {
+      cursor: pointer;
+    }
+  }
+}
+
+.morph-tagline-element {
+  position: absolute;
+  top: 220px;
+  left: 0;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--body);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  pointer-events: auto;
+  will-change: transform, opacity, top;
+  max-width: 100%;
+
+  @include respond-to("sm") {
+    top: 116px;
+    font-size: clamp(0.82rem, 3.2vw, 0.95rem);
+  }
+}
+
+.morph-socials-element {
+  position: absolute;
+  top: 270px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  pointer-events: auto;
+  will-change: transform, opacity, top;
+
+  @include respond-to("sm") {
+    top: 156px;
+    gap: 14px;
+
+    .social-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    opacity: 0.75;
+    transition: opacity 200ms ease, transform 200ms ease;
+
+    &:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+  }
+
+  .social-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    transition: color 200ms ease, transform 200ms ease;
+
+    &:hover {
+      color: var(--ink);
+      transform: translateX(3px);
+    }
+  }
+}
+
+.morph-nav-element {
+  position: absolute;
+  top: 340px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+  will-change: transform, top;
+
+  @include respond-to("sm") {
+    top: 204px;
+  }
+
+  .morph-anchors-group {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    will-change: transform;
+
+    @include respond-to("md") {
+      gap: 16px;
+    }
+
+    @include respond-to("sm") {
+      gap: 10px;
+    }
+  }
+
+  .morph-pipe-char {
+    margin: 0 20px;
+    color: var(--line);
+    font-size: 14px;
+    font-weight: 400;
+    user-select: none;
+    will-change: opacity, transform;
+
+    @include respond-to("md") {
+      margin: 0 10px;
+    }
+
+    @include respond-to("sm") {
+      margin: 0 6px;
+    }
+  }
+
+  .morph-blogs-group {
+    display: flex;
+    align-items: center;
+    will-change: transform;
+  }
+
+  .morph-link {
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    position: relative;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    padding: 4px 0;
+    display: inline-flex;
+    align-items: center;
+    transition: color 200ms ease;
+
+    @include respond-to("md") {
+      font-size: 13px;
+    }
+
+    @include respond-to("sm") {
+      font-size: 12px;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      bottom: -8px;
+      left: -4px;
+      right: -4px;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: var(--ink);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 200ms ease;
+    }
+
+    &:hover,
+    &.is-active {
+      color: var(--ink);
+    }
+
+    &.is-active::after {
+      transform: scaleX(1);
+    }
+  }
+}

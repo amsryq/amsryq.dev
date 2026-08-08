@@ -1,162 +1,478 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-import Name from "./Name.svelte";
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+import SocialIcon from "../components/SocialIcon.astro";
+import { profile } from "../data/profile";
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    </head>
-    <body>
-        <main>
-            <Name client:load />
+<Layout
+  title="amsryq. - aspiring developer | tech enthusiast"
+  description={profile.summary}
+>
+  <div class="morph-system-layer" id="morph-system" aria-label="Navigation">
+    <div class="morph-header-backdrop" id="header-backdrop"></div>
 
-            <div class="social-links">
-                <a
-                    href="https://github.com/amsryq"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                    >
-                        <path
-                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                        ></path>
-                    </svg>
-                </a>
-                <a
-                    href="https://x.com/amsryq"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="X (Twitter)"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                    >
-                        <path
-                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                        ></path>
-                    </svg>
-                </a>
-                <a
-                    href="https://www.threads.net/@amsryq"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Threads"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-threads"
-                        viewBox="0 0 16 16"
-                    >
-                        <path
-                            d="M6.321 6.016c-.27-.18-1.166-.802-1.166-.802.756-1.081 1.753-1.502 3.132-1.502.975 0 1.803.327 2.394.948s.928 1.509 1.005 2.644q.492.207.905.484c1.109.745 1.719 1.86 1.719 3.137 0 2.716-2.226 5.075-6.256 5.075C4.594 16 1 13.987 1 7.994 1 2.034 4.482 0 8.044 0 9.69 0 13.55.243 15 5.036l-1.36.353C12.516 1.974 10.163 1.43 8.006 1.43c-3.565 0-5.582 2.171-5.582 6.79 0 4.143 2.254 6.343 5.63 6.343 2.777 0 4.847-1.443 4.847-3.556 0-1.438-1.208-2.127-1.27-2.127-.236 1.234-.868 3.31-3.644 3.31-1.618 0-3.013-1.118-3.013-2.582 0-2.09 1.984-2.847 3.55-2.847.586 0 1.294.04 1.663.114 0-.637-.54-1.728-1.9-1.728-1.25 0-1.566.405-1.967.868ZM8.716 8.19c-2.04 0-2.304.87-2.304 1.416 0 .878 1.043 1.168 1.6 1.168 1.02 0 2.067-.282 2.232-2.423a6.2 6.2 0 0 0-1.528-.161"
-                        ></path>
-                    </svg>
-                </a>
-                <a
-                    href="https://instagram.com/amsryq"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                    >
-                        <path
-                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
-                        ></path>
-                    </svg>
-                </a>
-                <a
-                    style="display:none"
-                    href="https://linkedin.com/in/amsryq"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                    >
-                        <path
-                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                        ></path>
-                    </svg>
-                </a>
+    <div class="site-width morph-system-inner" id="morph-system-inner">
+      <div class="morph-brand-element" id="morph-brand">
+        <a href="/" class="morph-brand-link" draggable="false" aria-label="amsryq home">
+          <span class="brand-char-a">a</span><span class="brand-emit-wrap" id="brand-emit-wrap"><span class="emit-letter">m</span><span class="emit-letter">s</span><span class="emit-letter">r</span><span class="emit-letter">y</span><span class="emit-letter">q</span></span><span class="brand-char-dot">.</span>
+        </a>
+      </div>
+
+      <p class="morph-tagline-element" id="morph-tagline">
+        aspiring developer | tech enthusiast
+      </p>
+
+      <div class="morph-socials-element" id="morph-socials">
+        <a href={profile.socials.github} target="_blank" rel="noopener" aria-label="GitHub" class="social-icon">
+          <SocialIcon name="siGithub" size={22} />
+        </a>
+        <a href={profile.socials.x} target="_blank" rel="noopener" aria-label="X (Twitter)" class="social-icon">
+          <SocialIcon name="siX" size={20} />
+        </a>
+        <a href={profile.socials.threads} target="_blank" rel="noopener" aria-label="Threads" class="social-icon">
+          <SocialIcon name="siThreads" size={20} />
+        </a>
+        <a href={profile.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="social-icon">
+          <SocialIcon name="siInstagram" size={20} />
+        </a>
+        <a href="#socials" class="social-more" aria-label="See all socials">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+      </div>
+
+      <nav class="morph-nav-element" id="morph-nav" aria-label="Page navigation">
+        <div class="morph-anchors-group" id="morph-anchors">
+          <a href="#" class="morph-link is-active" data-section="about">about</a>
+          <a href="#projects" class="morph-link" data-section="projects">projects</a>
+          <a href="#socials" class="morph-link" data-section="socials">socials</a>
+          <a href="#contact" class="morph-link" data-section="contact">contact</a>
+        </div>
+
+        <span class="morph-pipe-char" id="morph-pipe" aria-hidden="true">|</span>
+
+        <div class="morph-blogs-group" id="morph-blogs">
+          <a href="/blog" class="morph-link morph-blog-link">blogs</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+    <section class="landing-hero-trigger" id="hero-trigger" aria-hidden="true">
+      <div class="hero-scroll-buffer"></div>
+    </section>
+
+    <section class="section section-about" id="about">
+      <div class="site-width section-content">
+        <div class="about-content">
+          <p class="about-lead">
+            {profile.summary}  
+          </p>
+          <div class="about-tools-section">
+            <span class="tools-label">Languages & Tools</span>
+            <div class="about-tools">
+              <a href="https://www.typescriptlang.org/" class="tool-pill" title="TypeScript">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="24" alt="TypeScript">
+                <span>TypeScript</span>
+              </a>
+              <a href="https://kotlinlang.org/" class="tool-pill" title="Kotlin">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" width="24" alt="Kotlin">
+                <span>Kotlin</span>
+              </a>
+              <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" class="tool-pill" title="C#">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" width="24" alt="C#">
+                <span>C#</span>
+              </a>
+              <a href="https://code.visualstudio.com/" class="tool-pill" title="VS Code">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="24" alt="VS Code">
+                <span>VS Code</span>
+              </a>
+              <a href="https://developer.android.com/studio" class="tool-pill" title="Android Studio">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" width="24" alt="Android Studio">
+                <span>Android Studio</span>
+              </a>
+              <a href="https://www.jetbrains.com/" class="tool-pill" title="JetBrains">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jetbrains/jetbrains-original.svg" width="24" alt="JetBrains">
+                <span>JetBrains</span>
+              </a>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div style="display:none">
-                <a class="link" href="/about">about</a>
-                &nbsp;|&nbsp;
-                <a class="link" href="/blog">blogs</a>
+    <section class="section section-alt" id="projects" aria-labelledby="projects-heading">
+      <div class="site-width section-content">
+        <h2 id="projects-heading" class="section-title">Projects</h2>
+        <div class="projects-list">
+          {profile.projects.map((project, index) => (
+            <article class="project-card" id={project.slug}>
+              <div class="project-card-top">
+                <span class="project-card-index">0{index + 1}</span>
+                <span class="project-card-type">{project.type}</span>
+              </div>
+              <h3 class="project-card-name">{project.name}</h3>
+              <p class="project-card-summary">{project.summary}</p>
+              <div class="project-card-bottom">
+                <span class="project-card-stack">{project.stack}</span>
+                <span class="project-card-metric">{project.metric}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="socials" aria-labelledby="socials-heading">
+      <div class="site-width section-content">
+        <h2 id="socials-heading" class="section-title">Socials</h2>
+        <div class="socials-grid">
+          <a href={profile.socials.github} target="_blank" rel="noopener" class="social-card">
+            <div class="social-card-left">
+              <SocialIcon name="siGithub" size={20} />
+              <span class="social-card-label">GitHub</span>
             </div>
-        </main>
-    </body>
-</html>
+            <div class="social-card-right">
+              <span class="social-card-handle">@amsryq</span>
+              <span class="social-card-arrow" aria-hidden="true">&#8599;</span>
+            </div>
+          </a>
+          <a href={profile.socials.x} target="_blank" rel="noopener" class="social-card">
+            <div class="social-card-left">
+              <SocialIcon name="siX" size={18} />
+              <span class="social-card-label">X</span>
+            </div>
+            <div class="social-card-right">
+              <span class="social-card-handle">@amsryq</span>
+              <span class="social-card-arrow" aria-hidden="true">&#8599;</span>
+            </div>
+          </a>
+          <a href={profile.socials.threads} target="_blank" rel="noopener" class="social-card">
+            <div class="social-card-left">
+              <SocialIcon name="siThreads" size={18} />
+              <span class="social-card-label">Threads</span>
+            </div>
+            <div class="social-card-right">
+              <span class="social-card-handle">@amsryq</span>
+              <span class="social-card-arrow" aria-hidden="true">&#8599;</span>
+            </div>
+          </a>
+          <a href={profile.socials.instagram} target="_blank" rel="noopener" class="social-card">
+            <div class="social-card-left">
+              <SocialIcon name="siInstagram" size={18} />
+              <span class="social-card-label">Instagram</span>
+            </div>
+            <div class="social-card-right">
+              <span class="social-card-handle">@amsryq</span>
+              <span class="social-card-arrow" aria-hidden="true">&#8599;</span>
+            </div>
+          </a>
+          <a href={profile.socials.linkedin} target="_blank" rel="noopener" class="social-card">
+            <div class="social-card-left">
+              <SocialIcon name="siLinkedin" size={18} />
+              <span class="social-card-label">LinkedIn</span>
+            </div>
+            <div class="social-card-right">
+              <span class="social-card-handle">amsryq</span>
+              <span class="social-card-arrow" aria-hidden="true">&#8599;</span>
+            </div>
+          </a>
+          <a href={`mailto:${profile.email}`} class="social-card">
+            <div class="social-card-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <span class="social-card-label">Email</span>
+            </div>
+            <div class="social-card-right">
+              <span class="social-card-handle">{profile.email}</span>
+              <span class="social-card-arrow" aria-hidden="true">&#8599;</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
 
-<style>
-    body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
+    <section class="section section-dark" id="contact" aria-labelledby="contact-heading">
+      <div class="site-width section-content">
+        <div class="contact-layout">
+          <h2 id="contact-heading" class="section-title section-title-light">Get in touch</h2>
+          <p class="contact-text">
+            Have something worth making simpler? I'm always open to interesting conversations, collaboration, or project ideas.
+          </p>
+          <a class="contact-cta" href={`mailto:${profile.email}`}>
+            Email me <span aria-hidden="true">&#8599;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer slot="footer" />
+</Layout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let activeObserver: IntersectionObserver | null = null;
+  let currentTimeline: gsap.core.Timeline | null = null;
+
+  function initMorphNav() {
+    const brandEl = document.getElementById("morph-brand");
+    const emitWrap = document.getElementById("brand-emit-wrap");
+    const emitLetters = document.querySelectorAll(".emit-letter");
+    const taglineEl = document.getElementById("morph-tagline");
+    const socialsEl = document.getElementById("morph-socials");
+    const navEl = document.getElementById("morph-nav");
+    const anchorsEl = document.getElementById("morph-anchors");
+    const pipeEl = document.getElementById("morph-pipe");
+    const blogsEl = document.getElementById("morph-blogs");
+    const backdropEl = document.getElementById("header-backdrop");
+    const heroTrigger = document.getElementById("hero-trigger");
+
+    if (!brandEl || !navEl || !heroTrigger || !emitWrap) return;
+
+    const brandLink = brandEl.querySelector(".morph-brand-link");
+    brandLink?.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (brandEl.classList.contains("is-collapsed")) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    brandLink?.addEventListener("dragstart", (e) => {
+      if (!brandEl.classList.contains("is-collapsed")) {
+        e.preventDefault();
+      }
+    });
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      ScrollTrigger.create({
+        trigger: heroTrigger,
+        start: "bottom top+=56",
+        onEnter: () => {
+          backdropEl?.classList.add("is-visible");
+          brandEl.classList.add("is-collapsed");
+        },
+        onLeaveBack: () => {
+          backdropEl?.classList.remove("is-visible");
+          brandEl.classList.remove("is-collapsed");
+        },
+      });
+      return;
     }
-    main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+
+    function buildTimeline() {
+      if (!brandEl || !navEl || !heroTrigger || !emitWrap) return;
+
+      if (currentTimeline) {
+        currentTimeline.kill();
+        currentTimeline = null;
+      }
+
+      gsap.set([brandEl, taglineEl, socialsEl, navEl, anchorsEl, pipeEl, blogsEl, emitWrap, backdropEl], { clearProps: "all" });
+      gsap.set(emitLetters, { clearProps: "all" });
+
+      const isMobile = window.innerWidth <= 768;
+      const heroTriggerH = heroTrigger ? heroTrigger.offsetHeight : 520;
+      const logoH = brandEl.offsetHeight || (isMobile ? 54 : 96);
+      const taglineH = taglineEl ? taglineEl.offsetHeight : 24;
+      const socialsH = socialsEl ? socialsEl.offsetHeight : 32;
+      const totalBlockH = logoH + taglineH + socialsH + (isMobile ? 48 : 66) + 32;
+
+      const heroLogoTop = isMobile
+        ? Math.max(36, Math.round((heroTriggerH - totalBlockH) * 0.40))
+        : Math.max(64, Math.round((heroTriggerH - totalBlockH) * 0.46));
+
+      const heroTaglineTop = heroLogoTop + logoH + (isMobile ? 12 : 14);
+      const heroSocialsTop = heroTaglineTop + taglineH + (isMobile ? 16 : 20);
+      const heroNavTop = heroSocialsTop + socialsH + (isMobile ? 22 : 32);
+
+      gsap.set(brandEl, { top: heroLogoTop, left: 0 });
+      if (taglineEl) gsap.set(taglineEl, { top: heroTaglineTop, left: 0 });
+      if (socialsEl) gsap.set(socialsEl, { top: heroSocialsTop, left: 0 });
+      gsap.set(navEl, { top: heroNavTop, left: 0, width: "100%" });
+
+      const headerTopBrand = 14;
+      const headerTopNav = 18;
+      const targetFontSize = isMobile ? 26 : 28;
+      const morphBrandLink = brandEl.querySelector<HTMLElement>(".morph-brand-link") || brandEl;
+      const heroFontSize = parseFloat(window.getComputedStyle(morphBrandLink).fontSize) || (isMobile ? 44 : 120);
+      const logoScale = targetFontSize / (heroFontSize || 1);
+
+      const logoDeltaY = headerTopBrand - heroLogoTop;
+
+      const charA = brandEl.querySelector<HTMLElement>(".brand-char-a");
+      const charDot = brandEl.querySelector<HTMLElement>(".brand-char-dot");
+      const charAWidth = charA ? charA.offsetWidth : 24;
+      const charDotWidth = charDot ? charDot.offsetWidth : 12;
+      const logoHeaderWidth = (charAWidth + charDotWidth) * logoScale;
+
+      const gap = isMobile ? 10 : 28;
+      const targetAnchorsLeft = Math.round(logoHeaderWidth + gap);
+
+      const originAnchorsLeft = anchorsEl ? anchorsEl.offsetLeft : 0;
+      const originNavTop = heroNavTop;
+
+      const anchorsDeltaX = targetAnchorsLeft - originAnchorsLeft;
+      const anchorsDeltaY = headerTopNav - originNavTop;
+
+      const siteContainer = document.getElementById("morph-system-inner");
+      const siteWidth = siteContainer ? siteContainer.offsetWidth : window.innerWidth;
+      const blogsWidth = blogsEl ? blogsEl.offsetWidth : 48;
+      const targetBlogsLeft = siteWidth - blogsWidth;
+
+      const originBlogsLeft = blogsEl ? blogsEl.offsetLeft : (originAnchorsLeft + (anchorsEl ? anchorsEl.offsetWidth : 200) + 40);
+      const blogsDeltaX = targetBlogsLeft - originBlogsLeft;
+      const blogsDeltaY = headerTopNav - originNavTop;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroTrigger,
+          start: "top top",
+          end: "bottom top+=56",
+          scrub: 0.3,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (self.progress > 0.5) {
+              brandEl.classList.add("is-collapsed");
+            } else {
+              brandEl.classList.remove("is-collapsed");
+            }
+          },
+        },
+      });
+
+      if (taglineEl) {
+        tl.to(taglineEl, { opacity: 0, y: -12, ease: "power1.in", duration: 0.3 }, 0);
+      }
+      if (socialsEl) {
+        tl.to(socialsEl, { opacity: 0, y: -12, ease: "power1.in", duration: 0.3 }, 0);
+      }
+
+      tl.to(
+        emitLetters,
+        {
+          y: (i) => -12 - i * 3,
+          x: (i) => 6 + i * 4,
+          opacity: 0,
+          stagger: 0.02,
+          ease: "power2.inOut",
+          duration: 0.4,
+        },
+        0.05
+      );
+
+      tl.to(
+        emitWrap,
+        {
+          width: 0,
+          opacity: 0,
+          ease: "power2.inOut",
+          duration: 0.45,
+        },
+        0.08
+      );
+
+      tl.to(
+        brandEl,
+        {
+          y: logoDeltaY,
+          scale: logoScale,
+          transformOrigin: "top left",
+          ease: "power2.inOut",
+          duration: 0.8,
+        },
+        0.05
+      );
+
+      if (anchorsEl) {
+        tl.to(
+          anchorsEl,
+          {
+            x: anchorsDeltaX,
+            y: anchorsDeltaY,
+            ease: "power2.inOut",
+            duration: 0.8,
+          },
+          0.05
+        );
+      }
+
+      if (pipeEl) {
+        tl.to(pipeEl, { opacity: 0, scale: 0.3, ease: "power1.in", duration: 0.3 }, 0.1);
+      }
+
+      if (blogsEl) {
+        tl.to(
+          blogsEl,
+          {
+            x: blogsDeltaX,
+            y: blogsDeltaY,
+            ease: "power2.inOut",
+            duration: 0.8,
+          },
+          0.05
+        );
+      }
+
+      if (backdropEl) {
+        tl.to(backdropEl, { opacity: 1, ease: "power1.inOut", duration: 0.4 }, 0.3);
+      }
+
+      currentTimeline = tl;
     }
-    .link {
-        margin-top: 20px;
-        font-size: 1.4rem;
-        text-decoration: none;
-        color: #848484;
+
+    buildTimeline();
+
+    let resizeTimer: number;
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        buildTimeline();
+        ScrollTrigger.refresh();
+      }, 100);
     }
-    .social-links {
-        display: flex;
-        gap: 1.5rem;
-        margin-top: 2rem;
-        align-items: center;
-        justify-content: center;
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+
+    if (activeObserver) activeObserver.disconnect();
+
+    const links = document.querySelectorAll(".morph-anchors-group .morph-link");
+    const sectionIdToNav: Record<string, string> = { "hero-trigger": "about" };
+    activeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = sectionIdToNav[entry.target.id] || entry.target.id;
+            links.forEach((link) => {
+              link.classList.toggle("is-active", link.getAttribute("data-section") === id);
+            });
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -50% 0px" }
+    );
+
+    document.querySelectorAll("section[id]").forEach((section) => activeObserver?.observe(section));
+  }
+
+  function safeInit() {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        initMorphNav();
+      });
+    } else {
+      initMorphNav();
     }
-    .social-links a {
-        color: #666;
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-    }
-    .social-links a:hover {
-        color: #222;
-        transform: translateY(-4px) scale(1.1);
-    }
-    .social-links svg {
-        width: 28px;
-        height: 28px;
-    }
-</style>
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", safeInit);
+  } else {
+    safeInit();
+  }
+  document.addEventListener("astro:page-load", safeInit);
+</script>

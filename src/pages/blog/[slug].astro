@@ -1,0 +1,58 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { getReadingTime } from "../../utils/readingTime";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = post.data.date.toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
+const readTime = getReadingTime(post.body);
+---
+
+<Layout title={`${post.data.title} — amsryq.`} description={post.data.description ?? post.data.title}>
+  <div class="simple-blog-page">
+    <div class="simple-blog-wrap">
+      <header class="simple-blog-top">
+        <a href="/" class="simple-brand-logo" aria-label="amsryq home">
+          a<span class="simple-brand-dot">.</span>
+        </a>
+        <a href="/blog" class="simple-header-title">blogs</a>
+      </header>
+
+      <main class="simple-article-view">
+        <a href="/blog" class="simple-article-back">
+          <span aria-hidden="true">←</span> back to blogs
+        </a>
+
+        <article>
+          <header class="simple-article-header">
+            <h1 class="simple-article-h1">{post.data.title}</h1>
+            {post.data.description && <p class="simple-article-lead">{post.data.description}</p>}
+            <div class="simple-article-meta">
+              <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
+              <span class="simple-post-sep" aria-hidden="true">|</span>
+              <span class="simple-post-read">{readTime}</span>
+            </div>
+          </header>
+
+          <div class="simple-article-content">
+            <Content />
+          </div>
+        </article>
+      </main>
+    </div>
+  </div>
+</Layout>

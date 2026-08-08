@@ -1,0 +1,18 @@
+$bp-sm: 480px;
+$bp-md: 768px;
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "sm" {
+    @media (max-width: #{$bp-sm}) {
+      @content;
+    }
+  } @else if $breakpoint == "md" {
+    @media (max-width: #{$bp-md}) {
+      @content;
+    }
+  } @else {
+    @media (max-width: #{$breakpoint}) {
+      @content;
+    }
+  }
+}
