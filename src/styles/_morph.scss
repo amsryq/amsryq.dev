@@ -104,7 +104,7 @@
   font-size: clamp(0.95rem, 2vw, 1.15rem);
   font-weight: 400;
   letter-spacing: -0.01em;
-  pointer-events: auto;
+  pointer-events: none;
   will-change: transform, opacity, top;
   max-width: 100%;
 
@@ -168,7 +168,7 @@
   left: 0;
   display: flex;
   align-items: center;
-  pointer-events: auto;
+  pointer-events: none;
   will-change: transform, top;
 
   @include respond-to("sm") {
@@ -179,6 +179,7 @@
     display: flex;
     align-items: center;
     gap: 28px;
+    pointer-events: auto;
     will-change: transform;
 
     @include respond-to("md") {
@@ -196,6 +197,7 @@
     font-size: 14px;
     font-weight: 400;
     user-select: none;
+    pointer-events: none;
     will-change: opacity, transform;
 
     @include respond-to("md") {
@@ -210,6 +212,7 @@
   .morph-blogs-group {
     display: flex;
     align-items: center;
+    pointer-events: auto;
     will-change: transform;
   }
 
