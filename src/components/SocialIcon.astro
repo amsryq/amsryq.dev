@@ -1,7 +1,28 @@
 ---
-import * as simpleIcons from "simple-icons";
+import githubSvg from "simple-icons/icons/github.svg?raw";
+import xSvg from "simple-icons/icons/x.svg?raw";
+import threadsSvg from "simple-icons/icons/threads.svg?raw";
+import instagramSvg from "simple-icons/icons/instagram.svg?raw";
 
-const customIcons: Record<string, { title: string; hex: string; path: string }> = {
+type Icon = { title: string; hex: string; path: string };
+
+function iconFromSvg(svg: string, title: string, hex: string): Icon {
+  const path = svg.match(/<path d="([^"]+)"/)?.[1];
+
+  if (!path) {
+    throw new Error(`[SocialIcon] Could not read the path for "${title}".`);
+  }
+
+  return { title, hex, path };
+}
+
+// Import only the four SVG assets used by this site. Importing the package root
+// loads its entire multi-megabyte icon catalog during Vite's dependency scan.
+const icons: Record<string, Icon> = {
+  siGithub: iconFromSvg(githubSvg, "GitHub", "181717"),
+  siX: iconFromSvg(xSvg, "X", "000000"),
+  siThreads: iconFromSvg(threadsSvg, "Threads", "000000"),
+  siInstagram: iconFromSvg(instagramSvg, "Instagram", "E4405F"),
   siLinkedin: {
     title: "LinkedIn",
     hex: "0A66C2",
@@ -9,11 +30,8 @@ const customIcons: Record<string, { title: string; hex: string; path: string }> 
   },
 };
 
-type SimpleIconKeys = keyof typeof simpleIcons;
-type CustomIconKeys = keyof typeof customIcons;
-
 interface Props {
-  name: SimpleIconKeys | CustomIconKeys | (string & {});
+  name: keyof typeof icons;
   size?: number | string;
   class?: string;
   title?: string;
@@ -28,10 +46,10 @@ const {
   useBrandColor = false,
 } = Astro.props;
 
-const icon = customIcons[name as string] || (simpleIcons as any)[name];
+const icon = icons[name];
 
 if (!icon || !icon.path) {
-  throw new Error(`[SocialIcon] Icon "${name}" does not exist in simple-icons or custom registry.`);
+  throw new Error(`[SocialIcon] Icon "${name}" does not exist in the local registry.`);
 }
 ---
 
