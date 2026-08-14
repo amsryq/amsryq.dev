@@ -1,12 +1,18 @@
 ---
+import SocialIcon from "./SocialIcon.astro";
 import { profile } from "../data/profile";
 
 const year = new Date().getFullYear();
+const sourceUrl = "https://github.com/amsryq/amsryq.dev";
 ---
 
 <footer class="site-footer">
   <div class="site-width footer-inner">
     <p class="footer-copyright">&copy; {year} {profile.displayName}</p>
+    <a class="footer-source" href={sourceUrl} target="_blank" rel="noopener" aria-label="Source code on GitHub">
+      <SocialIcon name="siGithub" size={14} />
+      <span>source</span>
+    </a>
   </div>
 </footer>
 
@@ -20,7 +26,10 @@ const year = new Date().getFullYear();
 
   .footer-inner {
     padding: 24px 0;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
   }
 
   .footer-copyright {
@@ -29,5 +38,21 @@ const year = new Date().getFullYear();
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.03em;
+  }
+
+  .footer-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--text);
+    }
   }
 </style>

@@ -1,0 +1,25 @@
+---
+import { profile } from "../data/profile";
+---
+
+<section class="section" id="projects" aria-labelledby="projects-heading">
+  <div class="site-width section-content">
+    <h2 id="projects-heading" class="section-title">Projects</h2>
+    <div class="projects-list">
+      {profile.projects.map((project, index) => (
+        <article class="project-card" id={project.slug}>
+          <div class="project-card-top">
+            <span class="project-card-index">0{index + 1}</span>
+            <span class="project-card-type">{project.type}</span>
+          </div>
+          <h3 class="project-card-name">{project.name}</h3>
+          <p class="project-card-summary">{project.summary}</p>
+          <div class="project-card-bottom">
+            <span class="project-card-stack">{project.stack}</span>
+            <span class="project-card-metric">{project.metric}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
