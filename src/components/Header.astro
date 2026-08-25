@@ -1,0 +1,321 @@
+---
+import SocialIcon from "./SocialIcon.astro";
+import { profile } from "../data/profile";
+---
+
+<div class="morph-system-layer" id="morph-system" aria-label="Navigation">
+  <div class="morph-header-backdrop" id="header-backdrop"></div>
+
+  <div class="site-width morph-system-inner" id="morph-system-inner">
+    <div class="morph-brand-element" id="morph-brand">
+      <a href="/" class="morph-brand-link" draggable="false" aria-label="amsryq home">
+        <span class="brand-char-a">a</span><span class="brand-emit-wrap" id="brand-emit-wrap"><span class="emit-letter">m</span><span class="emit-letter">s</span><span class="emit-letter">r</span><span class="emit-letter">y</span><span class="emit-letter">q</span></span><span class="brand-char-dot">.</span>
+      </a>
+    </div>
+
+    <p class="morph-tagline-element" id="morph-tagline">
+      aspiring developer | tech enthusiast
+    </p>
+
+    <div class="morph-socials-element" id="morph-socials">
+      <a href={profile.socials.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" class="social-icon">
+        <SocialIcon name="siLinkedin" size={18} />
+      </a>
+      <a href={profile.socials.github} target="_blank" rel="noopener" aria-label="GitHub" class="social-icon">
+        <SocialIcon name="siGithub" size={22} />
+      </a>
+      <a href={profile.socials.x} target="_blank" rel="noopener" aria-label="X (Twitter)" class="social-icon">
+        <SocialIcon name="siX" size={20} />
+      </a>
+      <a href="#socials" class="social-more" aria-label="See all socials">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+
+    <nav class="morph-nav-element" id="morph-nav" aria-label="Page navigation">
+      <div class="morph-anchors-group" id="morph-anchors">
+        <a href="#" class="morph-link is-active" data-section="about">about</a>
+        {false && (
+          <a href="#projects" class="morph-link" data-section="projects">projects</a>
+        )}
+        <a href="#socials" class="morph-link" data-section="socials">socials</a>
+        <a href="#contact" class="morph-link" data-section="contact">contact</a>
+      </div>
+
+      <span class="morph-pipe-char" id="morph-pipe" aria-hidden="true">|</span>
+
+      <div class="morph-blogs-group" id="morph-blogs">
+        <a href="/blog" class="morph-link morph-blog-link">blogs</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let activeObserver: IntersectionObserver | null = null;
+  let currentTimeline: gsap.core.Timeline | null = null;
+
+  function initMorphNav() {
+    const brandEl = document.getElementById("morph-brand");
+    const emitWrap = document.getElementById("brand-emit-wrap");
+    const emitLetters = document.querySelectorAll(".emit-letter");
+    const taglineEl = document.getElementById("morph-tagline");
+    const socialsEl = document.getElementById("morph-socials");
+    const navEl = document.getElementById("morph-nav");
+    const anchorsEl = document.getElementById("morph-anchors");
+    const pipeEl = document.getElementById("morph-pipe");
+    const blogsEl = document.getElementById("morph-blogs");
+    const backdropEl = document.getElementById("header-backdrop");
+    const heroTrigger = document.getElementById("hero-trigger");
+
+    if (!brandEl || !navEl || !heroTrigger || !emitWrap) return;
+
+    const brandLink = brandEl.querySelector(".morph-brand-link");
+    brandLink?.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (brandEl.classList.contains("is-collapsed")) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    brandLink?.addEventListener("dragstart", (e) => {
+      if (!brandEl.classList.contains("is-collapsed")) {
+        e.preventDefault();
+      }
+    });
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      ScrollTrigger.create({
+        trigger: heroTrigger,
+        start: "bottom top+=56",
+        onEnter: () => {
+          backdropEl?.classList.add("is-visible");
+          brandEl.classList.add("is-collapsed");
+        },
+        onLeaveBack: () => {
+          backdropEl?.classList.remove("is-visible");
+          brandEl.classList.remove("is-collapsed");
+        },
+      });
+      return;
+    }
+
+    function buildTimeline() {
+      if (!brandEl || !navEl || !heroTrigger || !emitWrap) return;
+
+      if (currentTimeline) {
+        currentTimeline.kill();
+        currentTimeline = null;
+      }
+
+      gsap.set([brandEl, taglineEl, socialsEl, navEl, anchorsEl, pipeEl, blogsEl, emitWrap, backdropEl], { clearProps: "all" });
+      gsap.set(emitLetters, { clearProps: "all" });
+
+      const isMobile = window.innerWidth <= 768;
+      const heroTriggerH = heroTrigger ? heroTrigger.offsetHeight : 520;
+      const logoH = brandEl.offsetHeight || (isMobile ? 54 : 96);
+      const taglineH = taglineEl ? taglineEl.offsetHeight : 24;
+      const socialsH = socialsEl ? socialsEl.offsetHeight : 32;
+      const totalBlockH = logoH + taglineH + socialsH + (isMobile ? 48 : 66) + 32;
+
+      const heroLogoTop = isMobile
+        ? Math.max(36, Math.round((heroTriggerH - totalBlockH) * 0.40))
+        : Math.max(64, Math.round((heroTriggerH - totalBlockH) * 0.46));
+
+      const heroTaglineTop = heroLogoTop + logoH + (isMobile ? 12 : 14);
+      const heroSocialsTop = heroTaglineTop + taglineH + (isMobile ? 16 : 20);
+      const heroNavTop = heroSocialsTop + socialsH + (isMobile ? 22 : 32);
+
+      gsap.set(brandEl, { top: heroLogoTop, left: 0 });
+      if (taglineEl) gsap.set(taglineEl, { top: heroTaglineTop, left: 0 });
+      if (socialsEl) gsap.set(socialsEl, { top: heroSocialsTop, left: 0 });
+      gsap.set(navEl, { top: heroNavTop, left: 0, width: "100%" });
+
+      const headerTopBrand = 14;
+      const headerTopNav = 18;
+      const targetFontSize = isMobile ? 26 : 28;
+      const morphBrandLink = brandEl.querySelector<HTMLElement>(".morph-brand-link") || brandEl;
+      const heroFontSize = parseFloat(window.getComputedStyle(morphBrandLink).fontSize) || (isMobile ? 44 : 120);
+      const logoScale = targetFontSize / (heroFontSize || 1);
+
+      const logoDeltaY = headerTopBrand - heroLogoTop;
+
+      const charA = brandEl.querySelector<HTMLElement>(".brand-char-a");
+      const charDot = brandEl.querySelector<HTMLElement>(".brand-char-dot");
+      const charAWidth = charA ? charA.offsetWidth : 24;
+      const charDotWidth = charDot ? charDot.offsetWidth : 12;
+      const logoHeaderWidth = (charAWidth + charDotWidth) * logoScale;
+
+      const gap = isMobile ? 10 : 28;
+      const targetAnchorsLeft = Math.round(logoHeaderWidth + gap);
+
+      const originAnchorsLeft = anchorsEl ? anchorsEl.offsetLeft : 0;
+      const originNavTop = heroNavTop;
+
+      const anchorsDeltaX = targetAnchorsLeft - originAnchorsLeft;
+      const anchorsDeltaY = headerTopNav - originNavTop;
+
+      const siteContainer = document.getElementById("morph-system-inner");
+      const siteWidth = siteContainer ? siteContainer.offsetWidth : window.innerWidth;
+      const blogsWidth = blogsEl ? blogsEl.offsetWidth : 48;
+      const targetBlogsLeft = siteWidth - blogsWidth;
+
+      const originBlogsLeft = blogsEl ? blogsEl.offsetLeft : (originAnchorsLeft + (anchorsEl ? anchorsEl.offsetWidth : 200) + 40);
+      const blogsDeltaX = targetBlogsLeft - originBlogsLeft;
+      const blogsDeltaY = headerTopNav - originNavTop;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroTrigger,
+          start: "top top",
+          end: "bottom top+=56",
+          scrub: 0.3,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (self.progress > 0.5) {
+              brandEl.classList.add("is-collapsed");
+            } else {
+              brandEl.classList.remove("is-collapsed");
+            }
+          },
+        },
+      });
+
+      if (taglineEl) {
+        tl.to(taglineEl, { opacity: 0, y: -12, ease: "power1.in", duration: 0.3 }, 0);
+      }
+      if (socialsEl) {
+        tl.to(socialsEl, { opacity: 0, y: -12, ease: "power1.in", duration: 0.3 }, 0);
+      }
+
+      tl.to(
+        emitLetters,
+        {
+          y: (i) => -12 - i * 3,
+          x: (i) => 6 + i * 4,
+          opacity: 0,
+          stagger: 0.02,
+          ease: "power2.inOut",
+          duration: 0.4,
+        },
+        0.05
+      );
+
+      tl.to(
+        emitWrap,
+        {
+          width: 0,
+          opacity: 0,
+          ease: "power2.inOut",
+          duration: 0.45,
+        },
+        0.08
+      );
+
+      tl.to(
+        brandEl,
+        {
+          y: logoDeltaY,
+          scale: logoScale,
+          transformOrigin: "top left",
+          ease: "power2.inOut",
+          duration: 0.8,
+        },
+        0.05
+      );
+
+      if (anchorsEl) {
+        tl.to(
+          anchorsEl,
+          {
+            x: anchorsDeltaX,
+            y: anchorsDeltaY,
+            ease: "power2.inOut",
+            duration: 0.8,
+          },
+          0.05
+        );
+      }
+
+      if (pipeEl) {
+        tl.to(pipeEl, { opacity: 0, scale: 0.3, ease: "power1.in", duration: 0.3 }, 0.1);
+      }
+
+      if (blogsEl) {
+        tl.to(
+          blogsEl,
+          {
+            x: blogsDeltaX,
+            y: blogsDeltaY,
+            ease: "power2.inOut",
+            duration: 0.8,
+          },
+          0.05
+        );
+      }
+
+      if (backdropEl) {
+        tl.to(backdropEl, { opacity: 1, ease: "power1.inOut", duration: 0.4 }, 0.3);
+      }
+
+      currentTimeline = tl;
+    }
+
+    buildTimeline();
+
+    let resizeTimer: number;
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        buildTimeline();
+        ScrollTrigger.refresh();
+      }, 100);
+    }
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+
+    if (activeObserver) activeObserver.disconnect();
+
+    const links = document.querySelectorAll(".morph-anchors-group .morph-link");
+    const sectionIdToNav: Record<string, string> = { "hero-trigger": "about" };
+    activeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = sectionIdToNav[entry.target.id] || entry.target.id;
+            links.forEach((link) => {
+              link.classList.toggle("is-active", link.getAttribute("data-section") === id);
+            });
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -50% 0px" }
+    );
+
+    document.querySelectorAll("section[id]").forEach((section) => activeObserver?.observe(section));
+  }
+
+  function safeInit() {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        initMorphNav();
+      });
+    } else {
+      initMorphNav();
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", safeInit);
+  } else {
+    safeInit();
+  }
+  document.addEventListener("astro:page-load", safeInit);
+</script>
+
